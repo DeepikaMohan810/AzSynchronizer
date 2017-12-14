@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>automation.azure.synchronizer</groupId>
+  <artifactId>ALBSynchronizer</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  <name>ALBSynchronizer</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <repositories>
+		<repository>
+			<id>central</id>
+			<name>99522d7eda9b-releases</name>
+			<url>http://52.0.6.83:8081/artifactory/util-java-release-local</url>
+		</repository>
+		<repository>
+			<id>UK</id>
+			<name>UK Central</name>
+			<url>http://uk.maven.org/maven2</url>
+		</repository>
+	</repositories>
+  <dependencies>
+  
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure</artifactId>
+      <version>1.0.0</version>
+      <exclusions>
+<exclusion>
+<groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-databind</artifactId>
+</exclusion>
+</exclusions>
+    </dependency>
+     <dependency>
+<groupId>com.fasterxml.jackson.core</groupId>
+<artifactId>jackson-databind</artifactId>
+<version>2.8.8</version>
+</dependency>
+    <dependency>
+<groupId>automaton.mapper</groupId>
+<artifactId>automaton-mapper</artifactId>
+<version>0.0.2</version>
+</dependency>
+<dependency>
+<groupId>automaton.utility</groupId>
+<artifactId>automaton-utility</artifactId>
+<version>1.11.33</version>
+<exclusions>
+<exclusion>
+<groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-databind</artifactId>
+</exclusion>
+</exclusions>
+</dependency>
+<dependency>
+<groupId>automaton.ingester</groupId>
+<artifactId>automaton-ingester</artifactId>
+<version>0.0.1</version>
+</dependency>
+<dependency>
+<groupId>automaton.assets</groupId>
+<artifactId>JobStatus</artifactId>
+<version>0.0.1</version>
+</dependency>
+       <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+    </dependency>
+    
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+    <build>
+
+<plugins>
+ <plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+<version>3.0</version>
+<configuration>
+<source>1.7</source>
+<target>1.7</target>
+</configuration>
+ </plugin>
+   <plugin>
+     <artifactId>maven-assembly-plugin</artifactId>
+     <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>automaton.synchronizer.alb.LaunchSynchronizer</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+     <executions>
+          <execution>
+           <id>make-assembly</id><!-- this is used for inheritance merges -->
+<phase>package</phase><!-- bind to the packaging phase -->
+<goals><goal>single</goal></goals>
+         </execution>
+  
+      </executions>
+   </plugin>
+ <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-shade-plugin</artifactId>
+  <version>2.3</version>
+ </plugin>
+</plugins>
+</build>
+</project>
